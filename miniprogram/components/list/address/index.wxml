@@ -1,0 +1,21 @@
+<view class="address-container">
+  <view class="address">
+    <block wx:if="{{address.name}}">
+      <view class="address-detail">
+        {{address.detail}}
+        <text class="~iconfont ~iconyoujian"></text>
+      </view>
+      <view class="address-info">
+        <text>{{address.name}}</text>
+        <text>{{address.phone}}</text>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="address-detail">添加地址<text class="~iconfont ~iconyoujian"></text></view>
+      <view class="address-info">
+        <text>姓名</text>
+        <text>联系电话</text>
+      </view>
+    </block>
+  </view>
+</view>
