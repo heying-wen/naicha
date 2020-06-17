@@ -1,0 +1,7 @@
+page{
+  background: #fff;
+}
+.submit{
+  background: #ffce00;
+  color: #fff;
+}

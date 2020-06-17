@@ -1,3 +1,8 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "l-segment" :"/miniprogram_npm/lin-ui/segment/index",
+    "l-segment-item" :"/miniprogram_npm/lin-ui/segment-item/index"
+  },
+  "navigationBarTitleText": "订单"
+
 }

@@ -43,6 +43,7 @@ class Storage {
         result = result.data
       }
     }
+    return result
   }
   //移除
   removeStorage(){

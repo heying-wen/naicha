@@ -1,8 +1,8 @@
-<view class="address-container">
+<view class="address-container" bindtap="chooseAddress">
   <view class="address">
     <block wx:if="{{address.name}}">
       <view class="address-detail">
-        {{address.detail}}
+        {{address.region[0]}} {{address.region[1]}} {{address.region[2]}} {{address.detail}}
         <text class="~iconfont ~iconyoujian"></text>
       </view>
       <view class="address-info">

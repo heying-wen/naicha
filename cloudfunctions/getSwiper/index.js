@@ -2,8 +2,8 @@
 const cloud = require('wx-server-sdk')
 const axios = require('axios')
 cloud.init()
-axios.defaults.baseURL = 'http://www.2yue.cc/index.php/'
-axios.defaults.timeout = 8000
+axios.defaults.baseURL = 'http://api.4yue.top/index.php/'
+axios.defaults.timeout = 10000
 axios.defaults.headers.appKey ='f68bSYqte0m6EibwhARrzTcYDPoV0FobCi06uDfM3eF4QGQQKSywmd71ytM'
 const db = cloud.database()
 const swiperCollection = db.collection('swiper')

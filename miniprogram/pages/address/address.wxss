@@ -1,0 +1,76 @@
+.add-btn{
+  width: 100%;
+  height: 88rpx;
+  background: #ffce00;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+  line-height: 88rpx;
+  font-size: 32rpx;
+  color: #fff;
+}
+.address-list{
+  width: 100%;
+  margin-top: 20rpx;
+  background: #fff;
+}
+.address-item{
+  width: 100%;
+  height: 148rpx;
+  padding: 40rpx 32rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.address-item.selected{
+  background: #ffce00;
+}
+.address-item.selected .address-content{
+  color: #fff;
+}
+.iconfont{
+  color: #fff;
+  font-size: 40rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50rpx;
+  height: 100%;
+}
+.address-content{
+  width: 0;
+  flex: 1;
+  height: 100%;
+  margin-right: 20rpx;
+}
+.address-name{
+  width: 100%;
+  height: 42rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 32rpx;
+}
+.address-detail{
+  font-size: 24rpx;
+  margin-top: 10rpx;
+  line-height: 1.5em;
+}
+.add-address{
+  width: 100%;
+  height: 90rpx;
+  background: #ffce00;
+  font-size: 36rpx;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+.iconfont{
+    padding-right: 10rpx;
+}

@@ -1,2 +1,44 @@
-<!--miniprogram/pages/order/order.wxml-->
-<text>miniprogram/pages/order/order.wxml</text>
+<view class="status-taber">
+  <l-segment bind:linchange="changeTabs" active-key="{{orderStatusDefault}}" l-active-class="tab-active" l-line-class="tab-line" bind:linchange="orderTaber">
+    <block wx:for="{{orderTaBar}}" wx:key="state">
+      <l-segment-item tab="{{item.name}}" key="{{item.state}}" />
+    </block>
+  </l-segment>
+</view>
+<view class="order-container">
+  <block wx:for="{{order}}" wx:key="_id">
+    <view class="order-item">
+      <view class="order-title">
+        <text class="order-address">
+          {{item.address}}({{item.consignee}})
+        </text>
+        <text class="order-status">已支付</text>
+      </view>
+      <view class="order-goods">
+        <block wx:for="{{item.goods}}" wx:for-item="goods" wx:key="goods_id">
+          <view class="goods-item">
+            <image class="goods-img" src="{{goods.goods_img}}"></image>
+            <view class="goods-info">
+              <view class="goods-name">{{goods.goods_name}}</view>
+              <view class="goods-number">
+                <view class="goods-price">￥{{goods.goods_price}}</view>
+                <view class="buyNumber">x{{goods.buyNumber}}</view>
+              </view>
+            </view> 
+          </view>
+        </block>
+      </view>
+      <view class="order-info">
+        <text class="order-time">{{item.createTime}}</text>
+        <view class="btn" bindtap="quickBuy" data-order-id="{{item._id}}">再来一单</view>
+      </view>
+    </view>
+  </block>
+  <view class="empty-data" hidden="{{order.length > 0}}">没有查询到数据</view>
+  <view class="load-more" hidden="{{!hasMore}}">点击查看更多</view>
+</view>
+<view class="no-order" hidden="{{hasOrder}}">
+  <image class="no-order-img" src="/images/order/order-no.png" />
+  <view class="to-cart">开始点餐</view>
+</view>
+<!-- <wxs src="../../utils/tool.wxs" module="tool"></wxs> -->

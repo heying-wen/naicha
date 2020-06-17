@@ -5,5 +5,6 @@
     "nc-goods":"/components/list/goods/index",
     "nc-cart":"/components/list/cart/index"
   },
-  "navigationBarTitleText": "点餐"
+  "navigationBarTitleText": "点餐",
+  "enablePullDownRefresh":true
 }

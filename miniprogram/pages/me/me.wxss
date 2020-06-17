@@ -1,1 +1,60 @@
-/* miniprogram/pages/me/me.wxss */
+/* header */
+.header-container{
+  width: 100%;
+  height: 300rpx;
+  background-size: 100% 240rpx;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  padding: 100rpx 30rpx 0;
+}
+.user-info{
+  width: 100%;
+  height: 200rpx;
+  border-radius: 20rpx;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+.user-avatar{
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  border: 1px solid #ffce00;
+  box-sizing: border-box;
+}
+.user-name{
+  font-size: 38rpx;
+  color: #000;
+}
+
+
+/* list */
+.menu{
+  width: 100%;
+  margin: 30rpx;
+}
+.list-container{
+  width:100%;
+  background-color: #fff;
+  border-radius: 20rpx;
+  overflow: hidden;
+}
+.list-item{
+  width: 100%;
+  height: 120rpx;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+}
+.list-img{
+  width: 50rpx;
+  height: 50rpx;
+  margin:  0 30rpx;
+}
+.list-name{
+  font-size: 32rpx;
+  color: #000;
+}

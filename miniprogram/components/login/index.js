@@ -1,16 +1,20 @@
 // components/login/index.js
-
+import {
+  getConfig
+} from '../../utils/function'
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-    isLogin:Number
+
   },
-  observers:{
-    isLogin(val){
+  lifetimes:{
+    attached(){
+      const AUTH_LOGIN_KEY = getConfig('app.auth_login_key')
+      const isLogin = wx.getStorageSync(AUTH_LOGIN_KEY)
       let showLogin
-      if(val === 0){
+      if(isLogin === 0){
         wx.hideTabBar()
         showLogin = true
       }else{
@@ -36,7 +40,11 @@ Component({
     getUserInfo(e){
       if(e.detail.userInfo){
         //允许授权
-        getApp().autoLogin()
+        getApp().autoLogin(()=>{
+          this.setData({
+            showLogin:false
+          })
+        })
       }else{
         //拒绝授权，关闭小程序
       }

@@ -1,4 +1,4 @@
-<nc-login isLogin="{{isLogin}}"></nc-login>
+<nc-login></nc-login>
 <swiper 
 indicator-dots="{{true}}"
 indicator-active-color="#ffffff"

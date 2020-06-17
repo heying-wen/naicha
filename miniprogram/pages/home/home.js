@@ -6,7 +6,7 @@ import {
 import {
   Banner
 } from '../../storage/Banner'
-const AUTH_LOGIN_KEY = getConfig('app.auth_login_key')
+
 Page({
 
   /**
@@ -16,7 +16,6 @@ Page({
     recommendList:[],
     navigate: [],
     bannerList: [],
-    isLogin:0,
   },
 
   /**
@@ -27,10 +26,6 @@ Page({
   },
   //初始化
   async initData() {
-    const isLogin = wx.getStorageSync(AUTH_LOGIN_KEY)
-    this.setData({
-      isLogin
-    })
     wx.showLoading({
       title: '加载中',
       mask:true

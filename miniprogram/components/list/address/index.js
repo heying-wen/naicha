@@ -11,13 +11,25 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    
   },
 
   /**
    * 组件的方法列表
    */
   methods: {
-
+    chooseAddress(){
+      // wx.chooseAddress({
+      //   success:res=>{
+      //     console.log(res)
+      //   }
+      // })
+      // wx.navigateTo({
+      //   url: '/pages/address/address?from=list',
+      // })
+      wx.redirectTo({
+        url: '/pages/address/address?from=list',
+      })
+    }
   }
 })

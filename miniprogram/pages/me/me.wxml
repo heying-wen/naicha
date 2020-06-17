@@ -1,2 +1,27 @@
-<!--miniprogram/pages/me/me.wxml-->
-<text>miniprogram/pages/me/me.wxml</text>
+<view class="header-container" style="background-image: url(/images/me/me1.png);">
+  <view class="user-info">
+    <view class="user-name">{{userInfo.nickName}}</view>
+    <image class="user-avatar" src="{{userInfo.avatarUrl}}" bindtap="changeAvatar" />
+  </view>
+</view>
+
+<view class="menu">
+  <view class="list-container">
+    <view class="list-item">
+      <image class="list-img" src="/images/me/me2.png" />
+      <text class="list-name">我的优惠券</text>
+    </view>
+    <view class="list-item" bindtap="createQrcode">
+      <image class="list-img" src="/images/me/me3.png" />
+      <text class="list-name">我的推广码</text>
+    </view>
+    <view class="list-item">
+      <image class="list-img" src="/images/me/me4.png" />
+      <text class="list-name">领券中心</text>
+    </view>
+    <view class="list-item" bindtap="jumpMenu" data-url="/pages/address/address">
+      <image class="list-img" src="/images/me/me5.png" />
+      <text class="list-name">我的收货地址</text>
+    </view>
+  </view>
+</view>

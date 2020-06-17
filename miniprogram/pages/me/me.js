@@ -1,66 +1,124 @@
-// miniprogram/pages/me/me.js
+import {User} from '../../model/User'
+import {dateFormat} from '../../utils/function'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    userInfo:{}
+  },
+  async getUser(){
+    // const user = await User.getDetailHttp()
+    const user = await User.getDetail()
+    this.setData({
+      userInfo: user
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getUser()
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  changeAvatar(){
+    wx.chooseImage({
+      count:1,
+      success: res=> {
+        console.log(res)
+        const avatarTmpPath = res.tempFilePaths[0]
+        // this.updateAvatarHttp(avatarTmpPath)
+        this.updateAvatarCloud(avatarTmpPath)
+      }
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  //接口上传头像
+  updateAvatarHttp(avatarTmpPath){ 
+    wx.showLoading({
+      title: '正在上传',
+      mask:true
+    })
+    User.uploadAvatar(avatarTmpPath).then(res=>{
+      console.log(res)
+      // this.setData({
+      //   'userInfo.avatarUrl':res.src
+      // })
+    }).catch(err=>{
+      console.error(err)
+      wx.showToast({
+        title: '上传失败',
+        icon:'none'
+      })
+    }).finally(()=>{
+      wx.hideLoading()
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  //云端上传头像
+  updateAvatarCloud(avatarTmpPath){
+    //上传图片到云存储
+    wx.showLoading({
+      title: '正在上传请稍后',
+      mask:true
+    })
+    const cloudPath = "user-avatar/" + dateFormat('YYYY-mm-dd',new Date())+'/'  + Date.now()+ avatarTmpPath.substr(avatarTmpPath.lastIndexOf('.'))
+    wx.cloud.uploadFile({
+      cloudPath,
+      filePath:avatarTmpPath
+    }).then(res =>{
+      if(res.fileID){
+        //修改头像
+        const avatarUrl = res.fileID
+        User.update(this.data.userInfo._id,{avatarUrl}).then(res=>{
+          console.log(res) 
+          if(res.success === 1){
+            this.setData({
+              'userInfo.avatarUrl':avatarUrl
+            })
+          }else{
+            wx.showToast({
+              title: res.message,
+              icon:'none'
+            })
+          }
+        }).finally(()=>{
+          wx.hideLoading()
+        })
+      }
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  jumpMenu(e){
+    const url = e.currentTarget.dataset.url
+    wx.navigateTo({
+      url
+    })
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
+  async createQrcode(){
+    const data ={
+      scene:'1,2,3'
+    }
+    const qrcode = wx.getStorageSync('qrcode')
+    if(qrcode && qrcode.scene === data.scene){
+      wx.previewImage({
+        urls: [qrcode.img.imgUrl],
+      })
+      return
+    }
+    const res = await User.getQrcode(data)
+    if(res.success === 1){
+      wx.previewImage({
+        urls: [res.data.imgUrl],
+      })
+      wx.setStorageSync('qrcode',{
+        img:res.data,
+        scene:data.scene
+      })
+    }else{
+      wx.showToast({
+        title: res.message,
+        icon:'none'
+      })
+    }
   },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+  
 })

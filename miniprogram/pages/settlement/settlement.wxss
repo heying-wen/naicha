@@ -1,0 +1,135 @@
+page{
+  margin-bottom: 88rpx;
+}
+.address-container{
+  width: 100%;
+  height: 140rpx;
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  padding:  0 20rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.address-detail{
+  width: 100%;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+.address-detail text{
+  font-weight: normal;
+  font-size: 28rpx;
+}
+.address-info{
+  width: 100%;
+  font-size: 26rpx;
+  color: #666;
+}
+.address-info text{
+  margin-right: 20rpx;
+}
+.goods-list{
+  width: 100%;
+  background: #fff;
+  padding: 20rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+.scroll-goods-view{
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+.goods-item{
+  width: 100%;
+  display: flex;
+  margin-bottom: 10rpx;
+}
+.goods-img{
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 10rpx;
+}
+.goods-info{
+  width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 0 20rpx;
+  position: relative;
+}
+.goods-name{
+  width: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  color: #666;
+  font-size: 28rpx;
+}
+.goods-price{
+  font-size: 32rpx;
+  color: #333;
+  font-weight: bold;
+}
+/* 优惠券 */
+.coupon-container{
+  width: 100%;
+  background: #fff;
+  margin-top: 20rpx;
+}
+.checkbox-img{
+  width: 30rpx;
+  height: 30rpx;
+}
+.limit-coupon{
+  font-size: 20rpx;
+  color: red;
+  margin-left: 20rpx;
+}
+
+/* 提交 */
+.submit-container{
+  width: 100%;
+  height: 88rpx;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  border-top: 1px solid #eee;
+}
+.submit-container .btn{
+  width: 200rpx;
+  height: 100%;
+  background: #ffce00;
+  color: #fff;
+  font-size: 36rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.submit-container .order-count{
+  flex: 1;
+  width: 0;
+  margin: 0 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.submit-container .order-count .actual-payment{
+  color: #ffce00;
+  font-size: 32rpx;
+  font-weight: 700;
+}
+.submit-container .order-count .order-info{
+  color: #999;
+  font-size: 24rpx;
+}

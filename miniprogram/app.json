@@ -4,7 +4,10 @@
     "pages/list/list",
     "pages/order/order",
     "pages/me/me",
-    "components/list/address/index"
+    "components/list/address/index",
+    "pages/address/address",
+    "pages/address-add/address-add",
+    "pages/settlement/settlement"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

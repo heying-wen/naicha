@@ -1,4 +1,8 @@
 import { Cart } from '../../model/Cart'
+import { getConfig,isEmptyObject } from '../../utils/function'
+import { Address } from '../../model/Address'
+const AUTH_LOGIN_KEY = getConfig('app.auth_login_key')
+const ADDRESS_STORE_NAME = getConfig('storage.selectAddress')
 const cartModel = new Cart()
 const MAX_FETCH_NUM = 6
 let catId = -1
@@ -9,11 +13,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    address:{
-      name:'张三',
-      phone:'13545123123',
-      detail:'湖南长沙'
-    },
+    address:{},
     catetory:[],
     goods:[],
     bodyHeight:0,
@@ -200,6 +200,7 @@ Page({
     this.getGoodsList()
   },
   async initData(){
+    await this.getAddress()
     await this.getCategory()
     await this.getGoodsList()
     const index = this.data.category.findIndex(item => item.cat_id === catId)
@@ -219,50 +220,92 @@ Page({
     })
   },
   cartSubmit(){
-    //判断是否登录
     //判断是否选择地址
+    if(isEmptyObject(this.data.address)){
+      wx.showToast({
+        title:'请输入地址',
+        icon:'none'
+      })
+      return
+    }
     //判断购物车是否为空
+    if(this.data.cart.length === 0){
+      wx.showToast({
+        title:'请选择商品',
+        icon:'none'
+      })
+      return
+    }
+    wx.navigateTo({
+      url:'/pages/settlement/settlement'
+    })
+  },
+  async getAddress(){
+    const address = await Address.getDefaultOrSelectAddress()
+    this.setData({
+      address
+    })
+    const storageAddress = wx.getStorageSync(ADDRESS_STORE_NAME)
+    if(!storageAddress && !isEmptyObject(address)){
+      wx.setStorageSync(ADDRESS_STORE_NAME, address)
+    }
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.initData()
+    const isLogin = wx.getStorageSync(AUTH_LOGIN_KEY)
+    if(isLogin != 1 ){
+      wx.switchTab({
+        url: '/pages/home/home',
+      })
+      return
+    }
+    
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.initData()
   },
-
+  resetData(){
+    this.setData({
+      address:{},
+      catetory:[],
+      goods:[],
+      bodyHeight:0,
+      rightTitle:'',
+      hasMore:true,
+      cart:[],
+    })
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-
+  onUnload: function () { 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-
+  onPullDownRefresh: async function () {
+    this.resetData()
+    await this.initData()
+    wx.stopPullDownRefresh()
   },
 
   /**

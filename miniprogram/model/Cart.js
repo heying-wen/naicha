@@ -5,10 +5,12 @@ class Cart{
   }
 
   //获取
-  async getCart (goodsId = 0){
+  async getCart (goodsId = 0,quickBuy = 0){
     const where = {}
     if(goodsId > 0){
       where.goodsId = goodsId
+    }if(quickBuy > 0){
+      where.isQuick = true
     }
     const res = await this.collection.where(where).get().then(res=>res.data)
     return res
@@ -24,10 +26,24 @@ class Cart{
         data
       })
     }catch(err){
-      console.log(err)
+      console.log('err',err)
       return false
     }
     return true
+  }
+
+  //添加多条
+  async setCartAll (data){
+    if(!Array.isArray(data) || data.length === 0){
+      return false
+    }
+    return await wx.cloud.callFunction({
+      name:'orders',
+      data:{
+        $url:'addCartAll',
+        data
+      }
+    }).then(res =>res.result)
   }
 
   async updateCartBuyNumber(goodsId,buyNumber){
@@ -70,6 +86,15 @@ class Cart{
       return false
     }
     return true
+  }
+
+  async removeQuickGoods(){
+    return await wx.cloud.callFunction({
+      name:'orders',
+      data:{
+        $url:'removeQuickCart'
+      }
+    })
   }
 }
 

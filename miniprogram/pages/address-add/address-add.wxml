@@ -1,0 +1,32 @@
+<form catchsubmit="saveAddress">
+  <l-list is-link="{{false}}">
+    <view slot="right-section">
+      <l-input label="姓名" name="name" value="{{address.name}}" placeholder="请输入收货人姓名" />
+    </view>
+  </l-list>
+  <l-list is-link="{{false}}">
+    <view slot="right-section">
+      <l-input label="联系方式" name="phone" value="{{address.phone}}" placeholder="请输入收货人联系电话" />
+    </view>
+  </l-list>
+  <l-list is-link="{{false}}" title="地区" gap="20">
+    <view slot="right-section">
+      <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+        <view class="picker">
+          {{region.length>0 ? region[0] + ' ' +region[1] + ' ' +region[2] : '请选择'}}
+        </view>
+      </picker>
+    </view>
+  </l-list>
+  <l-list is-link="{{false}}">
+    <view slot="right-section">
+      <l-input label="详细地址"  value="{{address.detail}}" name="detail" placeholder="请输入收货人详细地址" />
+    </view>
+  </l-list>
+  <l-list title="设置为默认地址" is-link="{{false}}" gap="20">
+    <view slot="right-section" >
+          <switch  name="isDefault"  checked="{{address.isDefault}}"/>
+    </view>
+  </l-list>
+  <button form-type="submit" class="submit">提交</button>
+</form>
